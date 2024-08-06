@@ -29,7 +29,6 @@ def run():
         ], index=3, color='green'
     )
 
-    # Add buttons in the same line
     col1, col2 = st.columns([1, 1])
     with col1:
         st.link_button("Open Link to Read More", "https://www.parliament.go.th/section77/survey_detail.php?id=396")
@@ -38,7 +37,6 @@ def run():
             st.experimental_set_query_params(page="summary")
             st.experimental_rerun()
 
-    # List of random Thai names and comments about กฎหมายสมรสเท่าเทียม
     thai_names = ["สมชาย", "สมหญิง", "นพพร", "จิราภรณ์", "กิตติ", "จารุวรรณ"]
     thai_comments = [
         "ผมสนับสนุนกฎหมายสัตว์ป่าเพราะเป็นการคุ้มครองสัตว์ที่สำคัญและจำเป็น",
@@ -55,7 +53,6 @@ def run():
             for _ in range(5)
         ]
 
-    # Function to display comments
     def display_comments():
         for i, comment in enumerate(st.session_state.comments):
             st.markdown(f"""
@@ -68,31 +65,4 @@ def run():
             </div>
             """, unsafe_allow_html=True)
             feedback = streamlit_feedback(feedback_type="thumbs", align="flex-start", key=f"feedback_{i}")
-            # st.write(f"Feedback: {feedback}")
-
-    # Display existing comments
-    st.subheader("Comments")
-    display_comments()
-
-    # Comment input section
-    st.subheader("Add a Comment")
-    name = "นาย รัฐสภา โปร่งใส"
-    st.markdown(f"**Commenting as:** {name}")
-    comment_text = st.text_area("Comment")
-
-    # Button to submit the comment
-    if st.button("Submit Comment"):
-        if comment_text:
-            new_comment = {"name": name, "text": comment_text, "thumbs_up": 0, "thumbs_down": 0}
-            st.session_state.comments.append(new_comment)
-            # Clear input fields after submission
-            st.experimental_rerun()
-        else:
-            st.warning("Please enter a comment before submitting.")
-
-    if st.button("กลับไปหน้าหลัก"):
-        st.experimental_set_query_params(page="home")
-        st.experimental_rerun()
-
-if __name__ == "__main__":
-    run()
+            # st.write(f"Feedback:
