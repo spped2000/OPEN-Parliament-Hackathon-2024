@@ -49,7 +49,6 @@ def run():
         "กฎหมายสัตว์ป่าจะช่วยให้สัตว์ทุกชนิดมีโอกาสในการมีชีวิตที่ปลอดภัยและสุขภาพดี"
     ]
 
-    # Generate a list of 5 initial comments
     if 'comments' not in st.session_state:
         st.session_state.comments = [
             {"name": random.choice(thai_names), "text": random.choice(thai_comments), "thumbs_up": random.randint(1, 100), "thumbs_down": random.randint(1, 100)}
@@ -69,12 +68,7 @@ def run():
             </div>
             """, unsafe_allow_html=True)
             feedback = streamlit_feedback(feedback_type="thumbs", align="flex-start", key=f"feedback_{i}")
-            if feedback:
-                if feedback == "👍":
-                    st.session_state.comments[i]["thumbs_up"] += 1
-                elif feedback == "👎":
-                    st.session_state.comments[i]["thumbs_down"] += 1
-                st.experimental_rerun()
+            # st.write(f"Feedback: {feedback}")
 
     # Display existing comments
     st.subheader("Comments")
