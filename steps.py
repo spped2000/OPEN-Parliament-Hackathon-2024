@@ -65,4 +65,27 @@ def run():
             </div>
             """, unsafe_allow_html=True)
             feedback = streamlit_feedback(feedback_type="thumbs", align="flex-start", key=f"feedback_{i}")
-            # st.write(f"Feedback:
+            # st.write(f"Feedback: {feedback}")
+
+    st.subheader("Comments")
+    display_comments()
+
+    st.subheader("Add a Comment")
+    name = "นาย รัฐสภา โปร่งใส"
+    st.markdown(f"**Commenting as:** {name}")
+    comment_text = st.text_area("Comment")
+
+    if st.button("Submit Comment"):
+        if comment_text:
+            new_comment = {"name": name, "text": comment_text, "thumbs_up": 0, "thumbs_down": 0}
+            st.session_state.comments.append(new_comment)
+            st.experimental_rerun()
+        else:
+            st.warning("Please enter a comment before submitting.")
+
+    if st.button("กลับไปหน้าหลัก"):
+        st.experimental_set_query_params(page="home")
+        st.experimental_rerun()
+
+if __name__ == "__main__":
+    run()
