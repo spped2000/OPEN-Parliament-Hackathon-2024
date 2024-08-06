@@ -69,7 +69,12 @@ def run():
             </div>
             """, unsafe_allow_html=True)
             feedback = streamlit_feedback(feedback_type="thumbs", align="flex-start", key=f"feedback_{i}")
-            # st.write(f"Feedback: {feedback}")
+            if feedback:
+                if feedback == "👍":
+                    st.session_state.comments[i]["thumbs_up"] += 1
+                elif feedback == "👎":
+                    st.session_state.comments[i]["thumbs_down"] += 1
+                st.experimental_rerun()
 
     # Display existing comments
     st.subheader("Comments")
